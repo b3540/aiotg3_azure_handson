@@ -1,4 +1,4 @@
-# from https://github.com/azure/iotedge/blob/aiotg3_stretch/edge-modules/ble/ble_edge_module.sh
+# from https://github.com/Azure/iotedge/blob/master/edge-modules/ble/ble_edge_module.sh
 
 ARCH=$(uname -m)
 BLE_CONFIG_FILE=
@@ -91,7 +91,7 @@ run_edge_ble_docker_container()
     docker_run_cmd+="-v ${BLE_CONFIG_FILE}:/app/ble_config/config.json:ro "
     docker_run_cmd+="${DOCKER_REGISTRY}/azedge-ble-aiotg3-${ARCH} "
     echo "Running Command: $docker_run_cmd"
-    $docker_run_cmd
+    $docker_run_cmd &
     if [ $? -ne 0 ]; then
         echo "Docker Run Failed With Exit Code $?"
         exit $?
