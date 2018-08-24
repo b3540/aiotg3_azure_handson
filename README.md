@@ -23,18 +23,18 @@ nmcli device wifi connect [ssid] password [PASSWORD]
 
 Armadillo-IoT G3とSensor Tagのペアリングを行います．
 
-### シェル上で以下を実行
+#### 0.シェル上で以下を実行
 ```
 root@armadillo:~# rfkill unblock bluetooth
 ```
 ※`rfkill unblock bluetooth`は、 Armadillo-IoT G3の電源On時に必ず一度実行します．
 
-### `bluetoothctl`コマンドを入力し，ユーティリティを実行します．
+#### 1.`bluetoothctl`コマンドを入力し，ユーティリティを実行します．
 ```
 root@armadillo:~# bluetoothctl
 ```
 
-### `version`と入力し，バージョンが`5.37`と表示されていることを確認します．
+#### 2.`version`と入力し，バージョンが`5.37`と表示されていることを確認します．
 ```
 [bluetooth]# version
 Version 5.37
@@ -44,14 +44,14 @@ Versionが異なる場合は，version 5.37をインストールします．
 
 - [Bluezインストール方法](install_bluez.md)
 
-### `power on` と入力します．
+#### 3.`power on` と入力します．
 
 ```
 [bluetooth]# power on
 Changing power on succeeded
 ```
 
-### `scan on`と入力し，スキャンを開始します．
+#### 4.`scan on`と入力し，スキャンを開始します．
 ```
 [bluetooth]# scan on
 ```
@@ -61,13 +61,13 @@ Discovery started
 [NEW] Device AA:BB:CC:DD:EE:FF CC2650 SensorTag
 ```
 
-### SensorTagが表示されたら，`scan off`コマンドを入力します．
+#### 5.SensorTagが表示されたら，`scan off`コマンドを入力します．
 ```
 [bluetooth]# scan off 
 ```
 センサータグのMAC Addressの`AA:BB:CC:DD:EE:FF`をメモしておきます．
 
-### センサータグとペアリングします．(AA:BB:CC:DD:EE:FFはスキャン中に表示された、SensorTagのMAC Address)
+#### 6.センサータグとペアリングします．(AA:BB:CC:DD:EE:FFはスキャン中に表示された、SensorTagのMAC Address)
 ```
 [bluetooth]# connect AA:BB:CC:DD:EE:FF
 ```
@@ -77,7 +77,7 @@ Connection successful
 [CC2650 SensorTag]#
 ```
 
-### `quit`と入力しユーティリティを終了します．
+#### 7.`quit`と入力しユーティリティを終了します．
 ```
 [bluetooth]# quit
 ```
@@ -93,7 +93,10 @@ Connection successful
 docker pull ngi644/azedge-ble-aiotg3-armv7hf
 ```
 
-## 起動用スクリプト類の取得
+※イメージの作成方法については，[こちら](https://github.com/ngi644/iotedge/tree/aiotg3_stretch/edge-modules/ble)を参照してください．
+
+
+## サンプルアプリケーション起動用スクリプト類の取得
 
 Gatewayアプリケーションイメージを起動するためのスクリプトやセンサータグとIoT Hubデバイスとのマッピング等を行うjsonファイルを取得します．
 
